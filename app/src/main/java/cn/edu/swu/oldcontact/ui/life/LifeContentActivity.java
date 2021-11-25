@@ -9,17 +9,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.edu.swu.oldcontact.IApp;
-import cn.edu.swu.oldcontact.MainActivity;
 import cn.edu.swu.oldcontact.R;
 import cn.edu.swu.oldcontact.javaBean.LifeItem;
-import cn.edu.swu.oldcontact.ui.life.LifeContentFragment;
 
 public class LifeContentActivity extends AppCompatActivity {
 

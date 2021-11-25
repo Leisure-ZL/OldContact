@@ -44,9 +44,18 @@ public class IApp extends Application {
     }
 
     private void initUserData() {
+        User user = new User();
+        user.setHeadImg(Utils.idToUri(this,R.drawable.add2).toString());
+
         User user1 = new User();
         user1.setUsername("啦啦啦");
         user1.setHeadImg(Utils.idToUri(this,R.drawable.head_test2).toString());
+
+        db.userDao().insert(user);
+        db.userDao().insert(user1);
+        db.userDao().insert(user1);
+        db.userDao().insert(user1);
+        db.userDao().insert(user1);
         db.userDao().insert(user1);
         db.userDao().insert(user1);
         db.userDao().insert(user1);
@@ -242,7 +251,7 @@ public class IApp extends Application {
         mClassifyList.add(classifyItem1);
         mClassifyList.add(classifyItem2);
         mClassifyList.add(classifyItem3);
-        mClassifyList.add(classifyItem4);
+    //    mClassifyList.add(classifyItem4);
         mClassifyList.add(classifyItem5);
 
     }

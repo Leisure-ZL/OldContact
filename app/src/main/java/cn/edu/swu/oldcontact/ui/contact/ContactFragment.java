@@ -8,14 +8,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,9 +20,6 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.amap.api.maps2d.AMap;
-import com.amap.api.maps2d.MapView;
-import com.amap.api.maps2d.UiSettings;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -35,8 +29,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.edu.swu.oldcontact.IApp;
-import cn.edu.swu.oldcontact.LocationActivity;
-import cn.edu.swu.oldcontact.MainActivity;
 import cn.edu.swu.oldcontact.R;
 import cn.edu.swu.oldcontact.javaBean.ContactClassifyItem;
 import cn.edu.swu.oldcontact.ui.service.ServiceFragment;
@@ -44,7 +36,7 @@ import cn.edu.swu.oldcontact.ui.service.ServiceFragment;
 
 public class ContactFragment extends Fragment {
     Unbinder unbinder;
-    public RecyclerView mClassifyRecycler;
+   // public RecyclerView mClassifyRecycler;
     ServiceFragment mServiceFragment;
     @BindView(R.id.location)
     public LinearLayout mLocation;
@@ -58,13 +50,6 @@ public class ContactFragment extends Fragment {
 
     @BindView(R.id.serviceBtn)
     public FloatingActionButton mServiceBtn;
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     List<ContactClassifyItem> mItemList;
 
 
@@ -72,36 +57,21 @@ public class ContactFragment extends Fragment {
     }
 
 
-    // TODO: Rename and change types and number of parameters
-    public static ContactFragment newInstance(String param1, String param2) {
-        ContactFragment fragment = new ContactFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contact, container, false);
-        mClassifyRecycler = view.findViewById(R.id.contact_classify_recycler);
+      //  mClassifyRecycler = view.findViewById(R.id.contact_classify_recycler);
         unbinder = ButterKnife.bind(this,view);
         mServiceBtn.setVisibility(View.VISIBLE);
         mLocation.setVisibility(View.VISIBLE);
-        mClassifyRecycler.setVisibility(View.VISIBLE);
+     //   mClassifyRecycler.setVisibility(View.VISIBLE);
         return view;
     }
 
@@ -115,29 +85,29 @@ public class ContactFragment extends Fragment {
 
         mServiceFragment = new ServiceFragment();
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        mClassifyRecycler.setLayoutManager(layoutManager);
-        ContactClassifyAdapter adapter = new ContactClassifyAdapter(mItemList);
-        mClassifyRecycler.setAdapter(adapter);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+//        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
+//        mClassifyRecycler.setLayoutManager(layoutManager);
+//        ContactClassifyAdapter adapter = new ContactClassifyAdapter(mItemList);
+//        mClassifyRecycler.setAdapter(adapter);
 
         //TODO:通过构造函数，创建不同数据源的Fragment
         ContactContentFragment fragment = new ContactContentFragment(0);
         replaceFragment(fragment);
 
-        adapter.setOnItemClickListener(new ContactClassifyAdapter.OnItemClickListener() {
-            @Override
-            public void onClick(int position) {
-                ContactContentFragment tFragment = new ContactContentFragment(position);
-                replaceFragment(tFragment);
-            }
-        });
+//        adapter.setOnItemClickListener(new ContactClassifyAdapter.OnItemClickListener() {
+//            @Override
+//            public void onClick(int position) {
+//                ContactContentFragment tFragment = new ContactContentFragment(position);
+//                replaceFragment(tFragment);
+//            }
+//        });
 
         mServiceBtn.setOnClickListener(v->{
             replaceFragment(mServiceFragment);
             mServiceBtn.setVisibility(View.INVISIBLE);
             mLocation.setVisibility(View.GONE);
-            mClassifyRecycler.setVisibility(View.GONE);
+        //    mClassifyRecycler.setVisibility(View.GONE);
             getActivity().findViewById(R.id.top_bar).setVisibility(View.GONE);
             getActivity().findViewById(R.id.bottom_bar).setVisibility(View.GONE);
         });

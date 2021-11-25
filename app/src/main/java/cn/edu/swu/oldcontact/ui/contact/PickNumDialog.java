@@ -3,7 +3,6 @@ package cn.edu.swu.oldcontact.ui.contact;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-import cn.edu.swu.oldcontact.MainActivity;
 import cn.edu.swu.oldcontact.R;
 
 public class PickNumDialog extends BottomSheetDialogFragment {

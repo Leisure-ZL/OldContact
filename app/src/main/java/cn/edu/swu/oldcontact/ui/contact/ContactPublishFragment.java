@@ -1,12 +1,10 @@
 package cn.edu.swu.oldcontact.ui.contact;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -17,16 +15,13 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
@@ -35,7 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.edu.swu.oldcontact.IApp;
-import cn.edu.swu.oldcontact.MainActivity;
+import cn.edu.swu.oldcontact.ui.main.MainActivity;
 import cn.edu.swu.oldcontact.R;
 import cn.edu.swu.oldcontact.javaBean.ContactContentItem;
 

@@ -1,17 +1,13 @@
 package cn.edu.swu.oldcontact.ui.life;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-import androidx.room.Room;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +19,6 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,10 +26,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.edu.swu.oldcontact.IApp;
-import cn.edu.swu.oldcontact.MainActivity;
 import cn.edu.swu.oldcontact.R;
 import cn.edu.swu.oldcontact.javaBean.LifeItem;
-import cn.edu.swu.oldcontact.utils.DB;
 
 
 public class LifeFragment extends Fragment {
@@ -44,8 +37,8 @@ public class LifeFragment extends Fragment {
     RecyclerView recyclerView;
     @BindView(R.id.refreshLayout)
     RefreshLayout mRefresh;
-    @BindView(R.id.life_classify_recycler)
-    RecyclerView mClassifyRecycler;
+//    @BindView(R.id.life_classify_recycler)
+//    RecyclerView mClassifyRecycler;
 
     List<LifeItem> items;
     LifeItemAdapter adapter;
@@ -78,11 +71,11 @@ public class LifeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         IApp app = (IApp) getActivity().getApplication();
 
-        LinearLayoutManager layoutManager1 = new LinearLayoutManager(getContext());
-        layoutManager1.setOrientation(RecyclerView.HORIZONTAL);
-        mClassifyRecycler.setLayoutManager(layoutManager1);
-        LifeClassifyAdapter classifyAdapter = new LifeClassifyAdapter(app.mClassifyList);
-        mClassifyRecycler.setAdapter(classifyAdapter);
+//        LinearLayoutManager layoutManager1 = new LinearLayoutManager(getContext());
+//        layoutManager1.setOrientation(RecyclerView.HORIZONTAL);
+//        mClassifyRecycler.setLayoutManager(layoutManager1);
+//        LifeClassifyAdapter classifyAdapter = new LifeClassifyAdapter(app.mClassifyList);
+//        mClassifyRecycler.setAdapter(classifyAdapter);
 
         for(int i=0;i<app.mClassifyList.size();i++){
             if (app.mClassifyList.get(i).getFlag() == 1){
@@ -95,15 +88,15 @@ public class LifeFragment extends Fragment {
         gridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adapter);
-        classifyAdapter.setOnItemClickListener(new LifeClassifyAdapter.OnItemClickListener() {
-            @Override
-            public void onClick(int position) {
-                items = app.db.lifeDao().getItemByIndex(position);
-                Collections.reverse(items);
-                adapter.mItemList = items;
-                adapter.notifyDataSetChanged();
-            }
-        });
+//        classifyAdapter.setOnItemClickListener(new LifeClassifyAdapter.OnItemClickListener() {
+//            @Override
+//            public void onClick(int position) {
+//                items = app.db.lifeDao().getItemByIndex(position);
+//                Collections.reverse(items);
+//                adapter.mItemList = items;
+//                adapter.notifyDataSetChanged();
+//            }
+//        });
 
 
         mRefresh.setRefreshHeader(new ClassicsHeader(getContext()));

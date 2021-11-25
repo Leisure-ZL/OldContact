@@ -1,4 +1,4 @@
-package cn.edu.swu.oldcontact;
+package cn.edu.swu.oldcontact.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -9,12 +9,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import cn.edu.swu.oldcontact.R;
 
 public class IndexActivity extends AppCompatActivity {
     TextView mTime;

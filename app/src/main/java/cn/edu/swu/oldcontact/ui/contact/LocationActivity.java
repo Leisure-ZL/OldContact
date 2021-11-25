@@ -1,4 +1,4 @@
-package cn.edu.swu.oldcontact;
+package cn.edu.swu.oldcontact.ui.contact;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +21,8 @@ import com.amap.api.maps2d.model.MyLocationStyle;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import cn.edu.swu.oldcontact.R;
 
 public class LocationActivity extends AppCompatActivity implements LocationSource, AMapLocationListener {
 

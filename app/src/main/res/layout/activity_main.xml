@@ -5,39 +5,87 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".ui.main.MainActivity">
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:gravity="center_vertical"
         android:background="#EDEDED"
-        android:id="@+id/top_bar"
-        android:orientation="horizontal">
+        android:id="@+id/top_bar">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:id="@+id/headImg"
             android:src="@drawable/head_test"
             android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
             android:layout_marginRight="10dp"/>
 
-        <EditText
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/headImg"
+            android:layout_marginTop="5dp"
+            android:id="@+id/top_top"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/square_border"
+                android:id="@+id/search_layout"
+                android:layout_weight="7">
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:src="@drawable/search"/>
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:background="@null"
+                    android:layout_weight="7"
+                    />
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/letter"
+
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_weight="7"
-            android:background="@drawable/rectangle_edit"
-            />
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/headImg"
+            android:layout_below="@id/top_top"
+            android:id="@+id/classify_recycler"/>
 
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/search"
-            android:layout_weight="1"/>
 
-    </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@id/care_list"
+        android:id="@+id/care_recycler"/>
 
     <FrameLayout
         android:layout_width="match_parent"

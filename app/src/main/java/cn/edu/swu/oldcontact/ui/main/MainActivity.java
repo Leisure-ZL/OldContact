@@ -1,4 +1,4 @@
-package cn.edu.swu.oldcontact;
+package cn.edu.swu.oldcontact.ui.main;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.animation.ObjectAnimator;
@@ -25,6 +27,7 @@ import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -36,12 +39,19 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.yalantis.ucrop.UCrop;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import cn.edu.swu.oldcontact.IApp;
+import cn.edu.swu.oldcontact.R;
+import cn.edu.swu.oldcontact.javaBean.User;
 import cn.edu.swu.oldcontact.ui.BottomDialog;
+import cn.edu.swu.oldcontact.ui.contact.ContactCareAdapter;
 import cn.edu.swu.oldcontact.ui.contact.ContactFragment;
 import cn.edu.swu.oldcontact.ui.contact.ContactPublishFragment;
+import cn.edu.swu.oldcontact.ui.life.LifeClassifyAdapter;
 import cn.edu.swu.oldcontact.ui.life.LifeFragment;
 import cn.edu.swu.oldcontact.ui.life.LifePublishFragment;
 import cn.edu.swu.oldcontact.ui.my.MyFragment;
@@ -57,9 +67,11 @@ public class MainActivity extends AppCompatActivity {
     MyFragment mMyFragment;
     BottomDialog mBottomDialog;
 
+    @BindView(R.id.classify_recycler)
+    RecyclerView mClassifyRecycler;
 
     @BindView(R.id.top_bar)
-    LinearLayout mTopBar;
+    RelativeLayout mTopBar;
     @BindView(R.id.bottom_bar)
     LinearLayout mBottomBar;
     @BindView(R.id.contact)
@@ -71,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.addBtn)
     ImageView mAddBtn;
 
+    @BindView(R.id.care_recycler)
+    RecyclerView mCareRecycler;
     public int contactPubFlag = 0;
 
     @Override
@@ -92,6 +106,21 @@ public class MainActivity extends AppCompatActivity {
 
         replaceFragment(mContactFragment);
 
+        IApp app = (IApp) getApplication();
+        LinearLayoutManager layoutManager1 = new LinearLayoutManager(this);
+        layoutManager1.setOrientation(RecyclerView.HORIZONTAL);
+        mClassifyRecycler.setLayoutManager(layoutManager1);
+        ClassifyAdapter classifyAdapter = new ClassifyAdapter(app.mClassifyList);
+        mClassifyRecycler.setAdapter(classifyAdapter);
+
+        List<User> itemList = app.db.userDao().getAll();
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(this);
+        layoutManager2.setOrientation(RecyclerView.HORIZONTAL);
+        mCareRecycler.setLayoutManager(layoutManager2);
+        CareAdapter adapter2 = new CareAdapter(itemList,this);
+        mCareRecycler.setAdapter(adapter2);
+
+
         mContactBtn.setOnClickListener(v->{
            replaceFragment(mContactFragment);
             mContactBtn.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
@@ -108,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
             replaceFragment(mMyFragment);
             mTopBar.setVisibility(View.GONE);
             mBottomBar.setVisibility(View.GONE);
+            mCareRecycler.setVisibility(View.GONE);
         });
 
         mAddBtn.setOnClickListener(view->{
@@ -119,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(mContactPublishFragment);
                     mTopBar.setVisibility(View.GONE);
                     mBottomBar.setVisibility(View.GONE);
+                    mCareRecycler.setVisibility(View.GONE);
                     mBottomDialog.dismiss();
                 }
             });
@@ -129,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(mLifePublishFragment);
                     mTopBar.setVisibility(View.GONE);
                     mBottomBar.setVisibility(View.GONE);
+                    mCareRecycler.setVisibility(View.GONE);
                     mBottomDialog.dismiss();
                 }
             });
@@ -147,7 +179,8 @@ public class MainActivity extends AppCompatActivity {
         if(current instanceof ContactFragment){
             mContactFragment.mServiceBtn.setVisibility(View.VISIBLE);
             mContactFragment.mLocation.setVisibility(View.VISIBLE);
-            mContactFragment.mClassifyRecycler.setVisibility(View.VISIBLE);
+         //   mContactFragment.mClassifyRecycler.setVisibility(View.VISIBLE);
+            mCareRecycler.setVisibility(View.VISIBLE);
             mTopBar.setVisibility(View.VISIBLE);
             mBottomBar.setVisibility(View.VISIBLE);
             mContactBtn.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
@@ -156,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
         if (current instanceof LifeFragment){
             mTopBar.setVisibility(View.VISIBLE);
             mBottomBar.setVisibility(View.VISIBLE);
+            mCareRecycler.setVisibility(View.VISIBLE);
             mLifeBtn.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
             mContactBtn.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
         }
