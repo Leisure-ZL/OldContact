@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EDEDED"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.my.MyFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/bg"
+        android:id="@+id/top_bar"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/back"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/back"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/top"
+        android:paddingBottom="50dp"
+        android:layout_below="@id/top_bar"
+        android:background="@color/white">
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:id="@+id/headImg"
+            android:layout_marginTop="60dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/head_test"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/name"
+            android:layout_below="@id/headImg"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:textSize="24sp"
+            android:text="晓风残月"
+            android:textColor="@color/black"
+            />
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/setting"
+        android:background="@color/white"
+        android:layout_below="@id/top"
+        android:layout_marginTop="100dp">
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/setting"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50dp"
+            android:text="设置"
+            android:textColor="@color/black"
+            />
+
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

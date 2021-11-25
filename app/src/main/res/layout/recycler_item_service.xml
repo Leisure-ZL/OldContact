@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_centerVertical="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--接收消息-->
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/left_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/left_chat_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/darker_gray"
+            android:gravity="center|center_vertical"/>
+        <ImageView
+            android:id="@+id/left_chat_head_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/service"/>
+        <TextView
+            android:textSize="20sp"
+            android:layout_below="@+id/left_chat_time"
+            android:layout_toRightOf="@id/left_chat_head_icon"
+            android:id="@+id/left_chat_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/left_dlg"
+            android:gravity="center|left"
+            android:padding="10dp"
+            android:text="接收消息测试" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/left_chat_img"
+            android:layout_toRightOf="@id/left_chat_head_icon"
+            android:layout_below="@+id/left_chat_time"
+            android:visibility="invisible"
+            />
+
+
+    </RelativeLayout>
+
+    <!--发送消息-->
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/right_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/right_chat_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/darker_gray"
+            android:gravity="center|center_vertical"/>
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:id="@+id/right_chat_head_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/head_test"/>
+        <TextView
+            android:layout_below="@+id/right_chat_time"
+            android:layout_toLeftOf="@id/right_chat_head_icon"
+            android:id="@+id/right_chat_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/right_dlg"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:text="发送消息"/>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/right_chat_time"
+            android:layout_toLeftOf="@id/right_chat_head_icon"
+            android:id="@+id/right_chat_img"
+            android:visibility="gone"
+            />
+    </RelativeLayout>
+</LinearLayout>

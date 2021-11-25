@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.service.ServiceFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/bg"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/back"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/back"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/service_recycler"
+        android:layout_weight="28"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/photoLayout"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/photo"
+            />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:id="@+id/function"
+        android:gravity="center_vertical"
+        android:background="@drawable/edit_top_border"
+        >
+        <ImageButton
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/phoneBtn"
+            android:background="@drawable/phone"
+            android:alpha="0.5"
+            android:layout_marginLeft="50dp"/>
+
+        <ImageButton
+            android:layout_width="25dp"
+            android:id="@+id/albumBtn"
+            android:layout_height="25dp"
+            android:alpha="0.5"
+            android:layout_marginLeft="50dp"
+            android:background="@drawable/album"
+            />
+
+        <ImageButton
+            android:layout_width="25dp"
+            android:id="@+id/photographBtn"
+            android:layout_height="25dp"
+            android:alpha="0.5"
+            android:layout_marginLeft="50dp"
+            android:background="@drawable/photograph"
+            />
+
+        <ImageButton
+            android:layout_width="25dp"
+            android:id="@+id/videoBtn"
+            android:layout_height="25dp"
+            android:alpha="0.5"
+            android:layout_marginLeft="50dp"
+           android:background="@drawable/videocall"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        android:id="@+id/btm"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:layout_weight="1">
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_weight="9"
+            android:id="@+id/edit"
+            android:background="@drawable/rectangle_edit"
+            />
+        <Button
+            android:layout_width="25dp"
+            android:layout_height="40dp"
+            android:id="@+id/sendBtn"
+            android:text="发送"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:background="@drawable/rectangle_btn"
+            />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
