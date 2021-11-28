@@ -84,7 +84,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:layout_below="@id/care_list"
         android:id="@+id/care_recycler"/>
 
     <FrameLayout

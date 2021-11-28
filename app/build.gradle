@@ -54,4 +54,5 @@ dependencies {
     implementation 'com.github.yalantis:ucrop:2.2.6'
     implementation 'com.amap.api:location:latest.integration'
     implementation 'com.amap.api:map2d:latest.integration'
+    implementation 'io.github.youth5201314:banner:2.2.2'
 }

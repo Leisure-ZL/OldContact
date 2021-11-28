@@ -20,7 +20,17 @@ public class User {
     private String headImg;
     @ColumnInfo(name = "careList")
     private List<String> careList;
+    @ColumnInfo(name = "integral")
+    private int integral;
 
+
+    public int getIntegral() {
+        return integral;
+    }
+
+    public void setIntegral(int integral) {
+        this.integral = integral;
+    }
 
     public int getId() {
         return id;

@@ -41,7 +41,7 @@ public class LifeFragment extends Fragment {
 //    RecyclerView mClassifyRecycler;
 
     List<LifeItem> items;
-    LifeItemAdapter adapter;
+    public LifeItemAdapter adapter;
     StaggeredGridLayoutManager gridLayoutManager;
 
     public LifeFragment() {

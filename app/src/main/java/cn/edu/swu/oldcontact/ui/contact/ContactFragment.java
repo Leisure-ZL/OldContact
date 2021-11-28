@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,9 +22,14 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.bumptech.glide.Glide;
+import com.youth.banner.Banner;
+import com.youth.banner.adapter.BannerImageAdapter;
+import com.youth.banner.holder.BannerImageHolder;
+import com.youth.banner.indicator.CircleIndicator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -30,8 +37,12 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.edu.swu.oldcontact.IApp;
 import cn.edu.swu.oldcontact.R;
-import cn.edu.swu.oldcontact.javaBean.ContactClassifyItem;
+import cn.edu.swu.oldcontact.javaBean.BannerItem;
+import cn.edu.swu.oldcontact.javaBean.ContactActItem;
+import cn.edu.swu.oldcontact.javaBean.Group;
+import cn.edu.swu.oldcontact.javaBean.User;
 import cn.edu.swu.oldcontact.ui.service.ServiceFragment;
+import cn.edu.swu.oldcontact.utils.Utils;
 
 
 public class ContactFragment extends Fragment {
@@ -42,15 +53,19 @@ public class ContactFragment extends Fragment {
     public LinearLayout mLocation;
     @BindView(R.id.location_text)
     TextView mLocationText;
+    @BindView(R.id.act_recycler)
+    RecyclerView mActRecycler;
+    @BindView(R.id.group_recycler)
+    RecyclerView mGroupRecycler;
+    @BindView(R.id.banner)
+    Banner banner;
+    @BindView(R.id.rank_recycler)
+    RecyclerView mRankRecycler;
+    public ContactActAdapter adapter;
 
     public AMapLocationClient mLocationClient = null;
     public AMapLocationListener mLocationListener;
     public AMapLocationClientOption mLocationOption = null;
-
-
-    @BindView(R.id.serviceBtn)
-    public FloatingActionButton mServiceBtn;
-    List<ContactClassifyItem> mItemList;
 
 
     public ContactFragment() {
@@ -69,7 +84,6 @@ public class ContactFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_contact, container, false);
       //  mClassifyRecycler = view.findViewById(R.id.contact_classify_recycler);
         unbinder = ButterKnife.bind(this,view);
-        mServiceBtn.setVisibility(View.VISIBLE);
         mLocation.setVisibility(View.VISIBLE);
      //   mClassifyRecycler.setVisibility(View.VISIBLE);
         return view;
@@ -80,37 +94,27 @@ public class ContactFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         startLocation();
-        mItemList = new ArrayList<>();
-        initData();
 
-        mServiceFragment = new ServiceFragment();
 
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-//        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
-//        mClassifyRecycler.setLayoutManager(layoutManager);
-//        ContactClassifyAdapter adapter = new ContactClassifyAdapter(mItemList);
-//        mClassifyRecycler.setAdapter(adapter);
+        IApp app = (IApp) getActivity().getApplication();
+        List<ContactActItem> itemList1 = app.db.contactContentDao().getListByIndex(0);
+        Collections.reverse(itemList1);//倒叙
+        List<ContactActItem> itemList2 = app.db.contactContentDao().getListByIndex(1);
+        Collections.reverse(itemList2);
 
-        //TODO:通过构造函数，创建不同数据源的Fragment
-        ContactContentFragment fragment = new ContactContentFragment(0);
-        replaceFragment(fragment);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        mActRecycler.setLayoutManager(layoutManager);
 
-//        adapter.setOnItemClickListener(new ContactClassifyAdapter.OnItemClickListener() {
-//            @Override
-//            public void onClick(int position) {
-//                ContactContentFragment tFragment = new ContactContentFragment(position);
-//                replaceFragment(tFragment);
-//            }
-//        });
+        adapter = new ContactActAdapter(itemList1,getContext(),getActivity());
+        mActRecycler.setAdapter(adapter);
 
-        mServiceBtn.setOnClickListener(v->{
-            replaceFragment(mServiceFragment);
-            mServiceBtn.setVisibility(View.INVISIBLE);
-            mLocation.setVisibility(View.GONE);
-        //    mClassifyRecycler.setVisibility(View.GONE);
-            getActivity().findViewById(R.id.top_bar).setVisibility(View.GONE);
-            getActivity().findViewById(R.id.bottom_bar).setVisibility(View.GONE);
-        });
+        List<Group> groupList = app.db.groupDao().getAll();
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext());
+        layoutManager2.setOrientation(RecyclerView.HORIZONTAL);
+        mGroupRecycler.setLayoutManager(layoutManager2);
+        ContactGroupAdapter adapter2 = new ContactGroupAdapter(groupList,getContext());
+        mGroupRecycler.setAdapter(adapter2);
 
         mLocation.setOnClickListener(v->{
             Intent intent = new Intent(getActivity(), LocationActivity.class);
@@ -118,32 +122,35 @@ public class ContactFragment extends Fragment {
         });
 
 
-    }
 
-    private void initData() {
-        ContactClassifyItem classifyItem1 = new ContactClassifyItem();
-        ContactClassifyItem classifyItem2 = new ContactClassifyItem();
-        ContactClassifyItem classifyItem3 = new ContactClassifyItem();
-        ContactClassifyItem classifyItem4 = new ContactClassifyItem();
-        ContactClassifyItem classifyItem5 = new ContactClassifyItem();
-        classifyItem1.setFlag(1);
-        classifyItem1.setTitle("旅游");
-        classifyItem2.setFlag(0);
-        classifyItem2.setTitle("棋牌");
-        classifyItem3.setFlag(0);
-        classifyItem3.setTitle("运动");
-        classifyItem4.setFlag(0);
-        classifyItem4.setTitle("聊天");
-        classifyItem5.setFlag(0);
-        classifyItem5.setTitle("其他");
+        useBanner();
 
-        mItemList.add(classifyItem1);
-        mItemList.add(classifyItem2);
-        mItemList.add(classifyItem3);
-        mItemList.add(classifyItem4);
-        mItemList.add(classifyItem5);
+        List<User> userList = app.db.userDao().getAll();
+        Utils.userListSort(userList);
+        LinearLayoutManager layoutManager3 = new LinearLayoutManager(getContext());
+        mRankRecycler.setLayoutManager(layoutManager3);
+        ContactRankAdapter adapter3 = new ContactRankAdapter(userList,getContext());
+        mRankRecycler.setAdapter(adapter3);
+
 
     }
+
+    public void useBanner() {
+        List<BannerItem> bannerList = ((IApp)getActivity().getApplication()).mBannerList;
+        banner.setAdapter(new BannerImageAdapter<BannerItem>(bannerList) {
+            @Override
+            public void onBindView(BannerImageHolder holder, BannerItem data, int position, int size) {
+                //图片加载自己实现
+                Glide.with(getContext())
+                        .load(data.getImg())
+                     //   .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
+                        .into(holder.imageView);
+            }
+        })
+                .addBannerLifecycleObserver(this)//添加生命周期观察者
+                .setIndicator(new CircleIndicator(getContext()));
+    }
+
 
     public void  replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

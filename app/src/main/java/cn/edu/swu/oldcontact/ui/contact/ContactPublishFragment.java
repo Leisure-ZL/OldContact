@@ -30,9 +30,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.edu.swu.oldcontact.IApp;
+import cn.edu.swu.oldcontact.javaBean.ContactActItem;
 import cn.edu.swu.oldcontact.ui.main.MainActivity;
 import cn.edu.swu.oldcontact.R;
-import cn.edu.swu.oldcontact.javaBean.ContactContentItem;
 
 
 public class ContactPublishFragment extends Fragment {
@@ -61,10 +61,12 @@ public class ContactPublishFragment extends Fragment {
     TextView mPubBtn;
     @BindView(R.id.img)
     public ImageView mImg;
+    @BindView(R.id.location_text)
+    TextView mLocation;
 
     int[] typeFlag = {0,0,0,0,0};
     PickNumDialog dialog;
-    public ContactContentItem item = new ContactContentItem();
+    public ContactActItem item = new ContactActItem();
 
     public ContactPublishFragment() {
         // Required empty public constructor
@@ -87,7 +89,8 @@ public class ContactPublishFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        IApp app = (IApp) getActivity().getApplication();
+        mLocation.setText(app.mCurLocation);
 
         selectType();
         mActPersonNum.setOnClickListener(v->{
@@ -116,7 +119,7 @@ public class ContactPublishFragment extends Fragment {
             item.setNote(mActNote.getText().toString());
             //TODO: distance??
 
-            IApp app = (IApp) getActivity().getApplication();
+
             app.db.contactContentDao().insert(item);
             getActivity().onBackPressed();
         });

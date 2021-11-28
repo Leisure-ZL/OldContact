@@ -2,43 +2,26 @@ package cn.edu.swu.oldcontact.ui.main;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.Manifest;
-import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.webkit.WebView;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationListener;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.yalantis.ucrop.UCrop;
 
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -46,16 +29,15 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.edu.swu.oldcontact.IApp;
 import cn.edu.swu.oldcontact.R;
+import cn.edu.swu.oldcontact.javaBean.ContactActItem;
+import cn.edu.swu.oldcontact.javaBean.LifeItem;
 import cn.edu.swu.oldcontact.javaBean.User;
 import cn.edu.swu.oldcontact.ui.BottomDialog;
-import cn.edu.swu.oldcontact.ui.contact.ContactCareAdapter;
 import cn.edu.swu.oldcontact.ui.contact.ContactFragment;
 import cn.edu.swu.oldcontact.ui.contact.ContactPublishFragment;
-import cn.edu.swu.oldcontact.ui.life.LifeClassifyAdapter;
 import cn.edu.swu.oldcontact.ui.life.LifeFragment;
 import cn.edu.swu.oldcontact.ui.life.LifePublishFragment;
 import cn.edu.swu.oldcontact.ui.my.MyFragment;
-import cn.edu.swu.oldcontact.ui.service.ServiceFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -86,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.care_recycler)
     RecyclerView mCareRecycler;
     public int contactPubFlag = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,14 +85,32 @@ public class MainActivity extends AppCompatActivity {
         mLifePublishFragment = new LifePublishFragment();
         mContactPublishFragment = new ContactPublishFragment();
 
-        replaceFragment(mContactFragment);
+        replaceFragment(mLifeFragment);
 
         IApp app = (IApp) getApplication();
+
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(this);
         layoutManager1.setOrientation(RecyclerView.HORIZONTAL);
         mClassifyRecycler.setLayoutManager(layoutManager1);
         ClassifyAdapter classifyAdapter = new ClassifyAdapter(app.mClassifyList);
         mClassifyRecycler.setAdapter(classifyAdapter);
+
+        classifyAdapter.setOnItemClickListener(new ClassifyAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(int position) {
+                if(getSupportFragmentManager().findFragmentById(R.id.main_activity_content) instanceof LifeFragment){
+                    List<LifeItem> items = app.db.lifeDao().getItemByIndex(position);
+                    mLifeFragment.adapter.mItemList = items;
+                    mLifeFragment.adapter.notifyDataSetChanged();
+                }else {
+                    List<ContactActItem> itemList1 = app.db.contactContentDao().getListByIndex(position);
+                    Collections.reverse(itemList1);//倒叙
+                    mContactFragment.adapter.mItemList = itemList1;
+                    mContactFragment.adapter.notifyDataSetChanged();
+                }
+            }
+        });
+
 
         List<User> itemList = app.db.userDao().getAll();
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(this);
@@ -125,12 +124,14 @@ public class MainActivity extends AppCompatActivity {
            replaceFragment(mContactFragment);
             mContactBtn.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
             mLifeBtn.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+            mCareRecycler.setVisibility(View.VISIBLE);
         });
 
         mLifeBtn.setOnClickListener(v->{
             replaceFragment(mLifeFragment);
             mLifeBtn.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
             mContactBtn.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+            mCareRecycler.setVisibility(View.GONE);
         });
 
         mHeadImg.setOnClickListener(v->{
@@ -177,14 +178,13 @@ public class MainActivity extends AppCompatActivity {
         super.onBackPressed();
         Fragment current = getSupportFragmentManager().findFragmentById(R.id.main_activity_content);
         if(current instanceof ContactFragment){
-            mContactFragment.mServiceBtn.setVisibility(View.VISIBLE);
             mContactFragment.mLocation.setVisibility(View.VISIBLE);
-         //   mContactFragment.mClassifyRecycler.setVisibility(View.VISIBLE);
             mCareRecycler.setVisibility(View.VISIBLE);
             mTopBar.setVisibility(View.VISIBLE);
             mBottomBar.setVisibility(View.VISIBLE);
             mContactBtn.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
             mLifeBtn.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+            mCareRecycler.setVisibility(View.GONE);
         }
         if (current instanceof LifeFragment){
             mTopBar.setVisibility(View.VISIBLE);

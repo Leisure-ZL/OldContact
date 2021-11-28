@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
+
+    <TextView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:id="@+id/rank"
+        android:text="1"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:layout_centerVertical="true"
+        android:background="@drawable/rectangle_btn"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/username"
+        android:text="啦啦啦"
+        android:textSize="12dp"
+        android:layout_toRightOf="@id/rank"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/integral"
+        android:text="100分"
+        android:textSize="16sp"
+        android:layout_toRightOf="@id/rank"
+        android:layout_below="@id/username"
+        />
+
+</RelativeLayout>

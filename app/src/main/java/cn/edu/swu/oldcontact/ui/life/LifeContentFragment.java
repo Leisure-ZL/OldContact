@@ -1,24 +1,18 @@
 package cn.edu.swu.oldcontact.ui.life;
 
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -26,12 +20,8 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.edu.swu.oldcontact.IApp;
 import cn.edu.swu.oldcontact.R;
-import cn.edu.swu.oldcontact.javaBean.ContactClassifyItem;
 import cn.edu.swu.oldcontact.javaBean.LifeContentCommentItem;
 import cn.edu.swu.oldcontact.javaBean.LifeItem;
-import cn.edu.swu.oldcontact.ui.contact.ContactClassifyAdapter;
-import cn.edu.swu.oldcontact.ui.service.ServiceFragment;
-import cn.edu.swu.oldcontact.utils.DB;
 import cn.edu.swu.oldcontact.utils.PagerLayoutManager;
 
 

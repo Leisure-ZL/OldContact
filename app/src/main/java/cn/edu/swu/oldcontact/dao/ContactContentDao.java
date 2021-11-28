@@ -7,25 +7,29 @@ import androidx.room.Query;
 
 import java.util.List;
 
-import cn.edu.swu.oldcontact.javaBean.ContactContentItem;
+import cn.edu.swu.oldcontact.javaBean.ContactActItem;
+import cn.edu.swu.oldcontact.javaBean.LifeItem;
 
 @Dao
 public interface ContactContentDao {
 
-    @Query("SELECT * FROM ContactContentItem")
-    List<ContactContentItem> getAll();
+    @Query("SELECT * FROM ContactActItem")
+    List<ContactActItem> getAll();
 
-    @Query("SELECT * FROM ContactContentItem where :ind=`index`")
-    List<ContactContentItem> getListByIndex(int ind);
+    @Query("SELECT * FROM ContactActItem where :ind=`index`")
+    List<ContactActItem> getListByIndex(int ind);
+
+    @Query("SELECT * FROM ContactActItem WHERE id = :actId")
+    ContactActItem getItemById(int actId);
 
     @Insert
-    void insert(ContactContentItem item);
+    void insert(ContactActItem item);
 
     @Delete
-    void delete(ContactContentItem item);
+    void delete(ContactActItem item);
 
 
-    @Query("DELETE FROM ContactContentItem")
+    @Query("DELETE FROM ContactActItem")
     void deleteAll();
 
 }

@@ -1,15 +1,16 @@
 package cn.edu.swu.oldcontact;
 
 import android.app.Application;
-import android.net.Uri;
 
 import androidx.room.Room;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.edu.swu.oldcontact.javaBean.BannerItem;
+import cn.edu.swu.oldcontact.javaBean.ContactActItem;
 import cn.edu.swu.oldcontact.javaBean.ContactClassifyItem;
-import cn.edu.swu.oldcontact.javaBean.ContactContentItem;
+import cn.edu.swu.oldcontact.javaBean.Group;
 import cn.edu.swu.oldcontact.javaBean.LifeContentCommentItem;
 import cn.edu.swu.oldcontact.javaBean.LifeItem;
 import cn.edu.swu.oldcontact.javaBean.User;
@@ -21,12 +22,14 @@ public class IApp extends Application {
     public DB db;
     public String mCurLocation;
     public List<ContactClassifyItem> mClassifyList = new ArrayList<>();
+    public List<BannerItem> mBannerList = new ArrayList<>();
 
     @Override
     public void onCreate() {
         super.onCreate();
 
         initClassifyData();
+        initBannerData();
 
         db = Room.databaseBuilder(this, DB.class,
                 "DB").allowMainThreadQueries().build();
@@ -35,21 +38,59 @@ public class IApp extends Application {
         db.lifeCommentDao().deleteAll();
         db.contactContentDao().deleteAll();
         db.userDao().deleteAll();
+        db.groupDao().deleteAll();
 
         initContactContentData();
         initLifeData();
         initLifeCommentData();
         initUserData();
+        initGroupData();
+
+    }
+
+    private void initBannerData() {
+
+        BannerItem bannerItem = new BannerItem();
+        bannerItem.setImg(Utils.idToUri(this,R.drawable.img1).toString());
+        mBannerList.add(bannerItem);
+        mBannerList.add(bannerItem);
+        mBannerList.add(bannerItem);
+
+    }
+
+
+    private void initGroupData() {
+        Group group = new Group();
+        group.setImg(Utils.idToUri(this,R.drawable.add2).toString());
+        group.setIndex(0);
+        db.groupDao().insert(group);
+
+        Group group1 = new Group();
+        group1.setImg(Utils.idToUri(this,R.drawable.head_test).toString());
+        group1.setIndex(0);
+        group1.setName("朝天门");
+        db.groupDao().insert(group1);
+        db.groupDao().insert(group1);
+        db.groupDao().insert(group1);
+        db.groupDao().insert(group1);
+        db.groupDao().insert(group1);
 
     }
 
     private void initUserData() {
         User user = new User();
         user.setHeadImg(Utils.idToUri(this,R.drawable.add2).toString());
+        user.setIntegral(0);
 
         User user1 = new User();
         user1.setUsername("啦啦啦");
         user1.setHeadImg(Utils.idToUri(this,R.drawable.head_test2).toString());
+        user1.setIntegral(100);
+
+        User user2 = new User();
+        user2.setUsername("啦");
+        user2.setHeadImg(Utils.idToUri(this,R.drawable.head_test2).toString());
+        user2.setIntegral(200);
 
         db.userDao().insert(user);
         db.userDao().insert(user1);
@@ -59,8 +100,8 @@ public class IApp extends Application {
         db.userDao().insert(user1);
         db.userDao().insert(user1);
         db.userDao().insert(user1);
-        db.userDao().insert(user1);
-        db.userDao().insert(user1);
+        db.userDao().insert(user2);
+        db.userDao().insert(user2);
 
     }
 
@@ -137,14 +178,14 @@ public class IApp extends Application {
     }
 
     private void initContactContentData() {
-        ContactContentItem item1 = new ContactContentItem();
-        ContactContentItem item2 = new ContactContentItem();
-        ContactContentItem item3 = new ContactContentItem();
-        ContactContentItem item4 = new ContactContentItem();
-        ContactContentItem item5 = new ContactContentItem();
-        ContactContentItem item6 = new ContactContentItem();
-        ContactContentItem item7 = new ContactContentItem();
-        ContactContentItem item8 = new ContactContentItem();
+        ContactActItem item1 = new ContactActItem();
+        ContactActItem item2 = new ContactActItem();
+        ContactActItem item3 = new ContactActItem();
+        ContactActItem item4 = new ContactActItem();
+        ContactActItem item5 = new ContactActItem();
+        ContactActItem item6 = new ContactActItem();
+        ContactActItem item7 = new ContactActItem();
+        ContactActItem item8 = new ContactActItem();
 
         item1.setIndex(0);
         item1.setBgImg(Utils.idToUri(this,R.drawable.chaotianmen).toString());
