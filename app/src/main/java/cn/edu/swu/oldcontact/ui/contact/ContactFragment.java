@@ -23,6 +23,7 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.youth.banner.Banner;
 import com.youth.banner.adapter.BannerImageAdapter;
 import com.youth.banner.holder.BannerImageHolder;
@@ -59,8 +60,11 @@ public class ContactFragment extends Fragment {
     RecyclerView mGroupRecycler;
     @BindView(R.id.banner)
     Banner banner;
-    @BindView(R.id.rank_recycler)
-    RecyclerView mRankRecycler;
+  //  @BindView(R.id.rank_recycler)
+  //  RecyclerView mRankRecycler;
+
+    @BindView(R.id.bottom_slide)
+    TextView mBtmSlide;
     public ContactActAdapter adapter;
 
     public AMapLocationClient mLocationClient = null;
@@ -122,15 +126,16 @@ public class ContactFragment extends Fragment {
         });
 
 
-
         useBanner();
 
-        List<User> userList = app.db.userDao().getAll();
-        Utils.userListSort(userList);
-        LinearLayoutManager layoutManager3 = new LinearLayoutManager(getContext());
-        mRankRecycler.setLayoutManager(layoutManager3);
-        ContactRankAdapter adapter3 = new ContactRankAdapter(userList,getContext());
-        mRankRecycler.setAdapter(adapter3);
+        mBtmSlide.setOnClickListener(v->{
+            RankBottomSheet bottomSheet = new RankBottomSheet();
+            bottomSheet.show(getFragmentManager(),"RankBottomSheet");
+
+
+        });
+
+
 
 
     }

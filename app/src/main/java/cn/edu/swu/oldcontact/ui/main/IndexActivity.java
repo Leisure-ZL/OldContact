@@ -5,9 +5,16 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,10 +22,10 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import cn.edu.swu.oldcontact.IApp;
 import cn.edu.swu.oldcontact.R;
 
 public class IndexActivity extends AppCompatActivity {
-    TextView mTime;
 
     String[] permissions = new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.READ_PHONE_STATE};
@@ -29,8 +36,12 @@ public class IndexActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
-//        mTime = findViewById(R.id.timer);
-        initPermission();
+
+        if(getSharedPreferences("isNew",MODE_PRIVATE).getBoolean("isNew",true)){
+            showDialog();
+        }else {
+            initPermission();
+        }
     }
 
     private void initPermission() {
@@ -90,22 +101,89 @@ public class IndexActivity extends AppCompatActivity {
 
     }
 
-    public void applyForPermission(){
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                    1);//自定义的code
-        }
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    2);//自定义的code
-        }
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE},
-                    3);//自定义的code
-        }
+
+
+    private void showDialog() {
+        final Dialog mDialog;
+        mDialog = new Dialog(this, R.style.Teldialog);
+        mDialog.setContentView(R.layout.dialog_index);
+        mDialog.setCanceledOnTouchOutside(false);
+        mDialog.setCancelable(false);
+        mDialog.show();
+        TextView content = mDialog.findViewById(R.id.tv_content);
+
+        String str = "请您务必审慎阅读、充分理解“用户协议”和“隐私政策”各条款，包括但不限于：" +
+                "为了向您提供交易相关基本功能，我们会收集、使用必要的信息。你可阅读" +
+                "《用户协议》" + "和" +
+                "《隐私政策》" +
+                "了解详细信息。如您同意，请点击“同意”接受我们的服务。";
+        SpannableStringBuilder ssb = new SpannableStringBuilder();
+        ssb.append(str);
+        //第一个出现的位置
+        final int start = str.indexOf("《");
+        ssb.setSpan(new ClickableSpan() {
+
+            @Override
+            public void onClick(View widget) {
+                //用户服务协议点击事件
+                Intent intent = new Intent(IndexActivity.this,ProtocolActivity.class);
+             //   intent.putExtra("msg","1");
+                startActivity(intent);
+            }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                //设置文件颜色
+                ds.setColor(getResources().getColor(R.color.green));
+                // 去掉下划线
+                ds.setUnderlineText(false);
+            }
+
+        }, start, start + 6, 0);
+
+        //最后一个出现的位置
+        final int end = str.lastIndexOf("《");
+        ssb.setSpan(new ClickableSpan() {
+
+            @Override
+            public void onClick(View widget) {
+                //隐私协议点击事件
+                Intent intent = new Intent(IndexActivity.this,ProtocolActivity.class);
+                intent.putExtra("msg","2");
+                startActivity(intent);
+            }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                //设置文件颜色
+                ds.setColor(getResources().getColor(R.color.green));
+                // 去掉下划线
+                ds.setUnderlineText(false);
+            }
+
+        }, end, end + 6, 0);
+        content.setMovementMethod(LinkMovementMethod.getInstance());
+        content.setText(ssb, TextView.BufferType.SPANNABLE);
+        //设置点击后的背景颜色为透明
+        content.setHighlightColor(ContextCompat.getColor(this, R.color.transparent));
+
+        mDialog.findViewById(R.id.tv_cancel).setOnClickListener(v -> {
+            mDialog.dismiss();
+            finish();
+        });
+        mDialog.findViewById(R.id.tv_sure).setOnClickListener(v -> {
+            mDialog.dismiss();
+            //更改状态，同意下次进入软件则不再弹出弹框
+            SharedPreferences sp = getSharedPreferences("isNew",MODE_PRIVATE);
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putBoolean("isNew",false);
+            editor.apply();
+
+            initPermission();
+        });
     }
+
 
 }

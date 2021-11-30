@@ -27,7 +27,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:id="@+id/dlg_left_btn"
-            android:text="社交"
+            android:text="生活"
             android:textSize="24sp" />
 
         <TextView
@@ -44,7 +44,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="生活"
+            android:text="社交"
             android:id="@+id/dlg_right_btn"
             android:textSize="24sp" />
     </LinearLayout>

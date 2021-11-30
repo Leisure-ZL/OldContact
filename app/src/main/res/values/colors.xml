@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="bg">#EDEDED</color>
     <color name="transparent">#00000000</color>
+    <color name="green">#86C390</color>
 </resources>

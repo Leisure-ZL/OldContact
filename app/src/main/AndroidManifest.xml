@@ -21,7 +21,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OldContact">
-        <activity android:name=".ui.contact.ContactActActivity"></activity>
+        <activity android:name=".ui.main.ProtocolActivity"></activity>
+        <activity android:name=".ui.contact.ContactActActivity" />
         <activity android:name=".ui.main.IndexActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

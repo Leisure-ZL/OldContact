@@ -32,7 +32,6 @@ import cn.edu.swu.oldcontact.R;
 import cn.edu.swu.oldcontact.javaBean.ContactActItem;
 import cn.edu.swu.oldcontact.javaBean.LifeItem;
 import cn.edu.swu.oldcontact.javaBean.User;
-import cn.edu.swu.oldcontact.ui.BottomDialog;
 import cn.edu.swu.oldcontact.ui.contact.ContactFragment;
 import cn.edu.swu.oldcontact.ui.contact.ContactPublishFragment;
 import cn.edu.swu.oldcontact.ui.life.LifeFragment;
@@ -124,14 +123,14 @@ public class MainActivity extends AppCompatActivity {
            replaceFragment(mContactFragment);
             mContactBtn.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
             mLifeBtn.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-            mCareRecycler.setVisibility(View.VISIBLE);
+            mCareRecycler.setVisibility(View.GONE);
         });
 
         mLifeBtn.setOnClickListener(v->{
             replaceFragment(mLifeFragment);
             mLifeBtn.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
             mContactBtn.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-            mCareRecycler.setVisibility(View.GONE);
+            mCareRecycler.setVisibility(View.VISIBLE);
         });
 
         mHeadImg.setOnClickListener(v->{
@@ -147,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
             mBottomDialog.setOnDlgLeftBtnClickListener(new BottomDialog.onDlgLeftBtnClickListener() {
                 @Override
                 public void onClick() {
-                    replaceFragment(mContactPublishFragment);
+                    replaceFragment(mLifePublishFragment);
                     mTopBar.setVisibility(View.GONE);
                     mBottomBar.setVisibility(View.GONE);
                     mCareRecycler.setVisibility(View.GONE);
@@ -158,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
             mBottomDialog.setOnDlgRightBtnClickListener(new BottomDialog.onDlgRightBtnClickListener() {
                 @Override
                 public void onClick() {
-                    replaceFragment(mLifePublishFragment);
+                    replaceFragment(mContactPublishFragment);
                     mTopBar.setVisibility(View.GONE);
                     mBottomBar.setVisibility(View.GONE);
                     mCareRecycler.setVisibility(View.GONE);

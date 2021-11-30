@@ -1,4 +1,4 @@
-package cn.edu.swu.oldcontact.ui;
+package cn.edu.swu.oldcontact.ui.main;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
