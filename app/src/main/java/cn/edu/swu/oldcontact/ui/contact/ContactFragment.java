@@ -103,8 +103,6 @@ public class ContactFragment extends Fragment {
         IApp app = (IApp) getActivity().getApplication();
         List<ContactActItem> itemList1 = app.db.contactContentDao().getListByIndex(0);
         Collections.reverse(itemList1);//倒叙
-        List<ContactActItem> itemList2 = app.db.contactContentDao().getListByIndex(1);
-        Collections.reverse(itemList2);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);

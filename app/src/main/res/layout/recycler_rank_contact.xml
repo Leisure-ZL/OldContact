@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/username"
         android:text="啦啦啦"
-        android:textSize="12dp"
+        android:textSize="14dp"
         android:layout_toRightOf="@id/rank"/>
 
     <TextView

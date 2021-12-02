@@ -69,8 +69,8 @@ public class LifePublishFragment extends Fragment {
     TextView mBtn2;
     @BindView(R.id.btn3)
     TextView mBtn3;
-    @BindView(R.id.btn4)
-    TextView mBtn4;
+//    @BindView(R.id.btn4)
+//    TextView mBtn4;
     @BindView(R.id.btn5)
     TextView mBtn5;
     @BindView(R.id.top_left)
@@ -266,17 +266,17 @@ public class LifePublishFragment extends Fragment {
                 typeFlag[2] = 0;
             }
         });
-        mBtn4.setOnClickListener(v->{
-            if(typeFlag[3] == 0){
-                mBtn4.setBackground(getResources().getDrawable(R.drawable.layout_border));
-                mBtn4.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-                typeFlag[3] = 1;
-            }else {
-                mBtn4.setBackgroundColor(getResources().getColor(R.color.transparent));
-                mBtn4.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-                typeFlag[3] = 0;
-            }
-        });
+//        mBtn4.setOnClickListener(v->{
+//            if(typeFlag[3] == 0){
+//                mBtn4.setBackground(getResources().getDrawable(R.drawable.layout_border));
+//                mBtn4.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+//                typeFlag[3] = 1;
+//            }else {
+//                mBtn4.setBackgroundColor(getResources().getColor(R.color.transparent));
+//                mBtn4.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+//                typeFlag[3] = 0;
+//            }
+//        });
         mBtn5.setOnClickListener(v->{
             if(typeFlag[4] == 0){
                 mBtn5.setBackground(getResources().getDrawable(R.drawable.layout_border));

@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.contact.ContactFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/top_layout"
-        android:background="@drawable/square_border"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentTop="true"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,28 +22,30 @@
             >
 
             <ImageView
-                android:layout_width="25dp"
+                android:layout_width="0dp"
                 android:layout_height="25dp"
+                android:layout_weight="1"
                 android:id="@+id/icon"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/location"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
                 android:text=""
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:id="@+id/location_text"
                 android:textColor="@color/black"
                 android:gravity="left|center"/>
             <TextView
-                android:layout_width="25dp"
+                android:layout_width="0dp"
                 android:layout_height="25dp"
+                android:layout_weight="1"
                 android:text=">"
                 android:gravity="center"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"/>
 
@@ -57,20 +60,44 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layerType="software"
+        android:background="@drawable/dot_line"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/top_layout"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/group_text"
+        android:layout_below="@id/top_layout"
+        android:text="群聊："
+        android:textSize="16sp"
+        android:paddingLeft="5dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:background="@drawable/square_border"
+        android:padding="5dp"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@id/group_text"
         android:id="@+id/group_recycler"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layerType="software"
+        android:background="@drawable/dot_line"
+        android:layout_below="@id/group_recycler"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/bottom_layout"
-        android:background="@drawable/square_border"
-        android:padding="10dp"
+        android:padding="5dp"
+        android:layout_below="@id/group_recycler"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -82,58 +109,26 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="官方活动"
                 android:textSize="16sp"
-                android:gravity="center_horizontal"/>
+                android:text="官方活动:"/>
 
             <com.youth.banner.Banner
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
+                app:banner_auto_loop="false"
                 android:layout_height="150dp" />
 
         </LinearLayout>
-
-
-
-<!--        <RelativeLayout-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:background="@drawable/square_left_border"-->
-<!--            android:paddingLeft="5dp"-->
-<!--            android:layout_weight="1">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="每日排行榜"-->
-<!--                android:textSize="16sp"-->
-<!--                android:id="@+id/rank_title"-->
-<!--                android:layout_alignParentTop="true"-->
-<!--                android:layout_centerHorizontal="true"/>-->
-
-<!--            <ImageView-->
-<!--                android:layout_width="15dp"-->
-<!--                android:layout_height="15dp"-->
-<!--                android:src="@drawable/tip"-->
-<!--                android:layout_alignParentRight="true"-->
-<!--                android:layout_margin="4dp"/>-->
-
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_below="@id/rank_title"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:id="@+id/rank_recycler"/>-->
-
-<!--        </RelativeLayout>-->
 
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bottom_layout"
         android:text="^"
-        android:textSize="32sp"
-        android:gravity="center_horizontal"
+        android:textSize="24sp"
+        android:gravity="center"
         android:id="@+id/bottom_slide"
         />
 
@@ -153,4 +148,4 @@
 
 
 
-</LinearLayout>
+</RelativeLayout>

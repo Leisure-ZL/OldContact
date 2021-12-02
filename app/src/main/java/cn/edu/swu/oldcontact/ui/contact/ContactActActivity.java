@@ -34,6 +34,8 @@ public class ContactActActivity extends AppCompatActivity {
     TextView mJoinBtn;
     @BindView(R.id.img)
     ImageView mImg;
+    @BindView(R.id.act_type)
+    TextView mActType;
 
     int mActId;
 
@@ -53,7 +55,9 @@ public class ContactActActivity extends AppCompatActivity {
         IApp app = (IApp)getApplication();
         ContactActItem item = app.db.contactContentDao().getItemById(mActId);
 
+        String[] typeArr = {"旅游","棋牌","运动","其他"};
 
+        mActType.setText(typeArr[item.getIndex()]);
         mImg.setImageURI(Uri.parse(item.getBgImg()));
         mActName.setText(item.getTitle());
         mActNote.setText(item.getNote());

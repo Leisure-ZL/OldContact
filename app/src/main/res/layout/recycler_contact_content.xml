@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="120dp"
-    android:layout_height="160dp"
+    android:layout_width="150dp"
+    android:layout_height="200dp"
     android:layout_margin="5dp"
     android:background="@drawable/rectangle_item">
 
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/title"
         android:text="朝天门旅游"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textColor="@color/white"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"

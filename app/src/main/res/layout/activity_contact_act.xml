@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:background="@color/bg"
         android:id="@+id/top">
@@ -79,6 +79,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:gravity="center"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
@@ -86,6 +87,12 @@
                 android:text="活动类型："
                 android:textSize="18sp"
                 android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:id="@+id/act_type"/>
 
 
         </LinearLayout>
@@ -104,6 +111,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="18sp"
                 android:id="@+id/act_name"/>
 
         </LinearLayout>
@@ -122,6 +130,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="18sp"
                 android:id="@+id/act_place"/>
 
         </LinearLayout>
@@ -142,6 +151,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
+                android:textSize="18sp"
                 android:paddingLeft="5dp"
                 android:id="@+id/act_already_num"/>
 
@@ -149,12 +159,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="/"
+                android:textSize="18sp"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1"
+                android:textSize="18sp"
                 android:id="@+id/act_all_num"/>
 
         </LinearLayout>
@@ -172,6 +184,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="18sp"
                 android:id="@+id/act_phone_num"/>
 
         </LinearLayout>
@@ -190,16 +203,18 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="18sp"
                 android:id="@+id/act_note"/>
         </LinearLayout>
 
     </LinearLayout>
 
     <TextView
-        android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
         android:text="加入群聊"
         android:textSize="24sp"
+        android:layout_marginBottom="10dp"
         android:id="@+id/join_btn"
         android:textColor="@color/white"
         android:background="@drawable/rectangle_publish_btn"

@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(int position) {
                 if(getSupportFragmentManager().findFragmentById(R.id.main_activity_content) instanceof LifeFragment){
                     List<LifeItem> items = app.db.lifeDao().getItemByIndex(position);
+                    Collections.reverse(items);//倒叙
                     mLifeFragment.adapter.mItemList = items;
                     mLifeFragment.adapter.notifyDataSetChanged();
                 }else {
