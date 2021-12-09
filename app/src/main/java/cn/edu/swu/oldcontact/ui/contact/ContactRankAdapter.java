@@ -1,6 +1,7 @@
 package cn.edu.swu.oldcontact.ui.contact;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,20 @@ public class ContactRankAdapter extends RecyclerView.Adapter<ContactRankAdapter.
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         User item = mItemList.get(position);
+        switch (position){
+            case 0:
+                holder.rank.setTextColor(mContext.getResources().getColor(R.color.first));
+                break;
+            case 1:
+                holder.rank.setTextColor(mContext.getResources().getColor(R.color.second));
+                break;
+            case 2:
+                holder.rank.setTextColor(mContext.getResources().getColor(R.color.third));
+                break;
+            default:
+                holder.rank.setTextColor(mContext.getResources().getColor(R.color.black));
+                break;
+        }
         holder.rank.setText(String.valueOf(position+1));
         holder.username.setText(item.getUsername());
         holder.integral.setText(String.valueOf(item.getIntegral()));

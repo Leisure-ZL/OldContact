@@ -10,4 +10,7 @@
     <color name="bg">#EDEDED</color>
     <color name="transparent">#00000000</color>
     <color name="green">#86C390</color>
+    <color name="first">#FF0000</color>
+    <color name="second">#FF4800</color>
+    <color name="third">#FF6F00</color>
 </resources>

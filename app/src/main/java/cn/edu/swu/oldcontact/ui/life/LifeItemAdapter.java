@@ -71,7 +71,8 @@ public class LifeItemAdapter extends RecyclerView.Adapter<LifeItemAdapter.ViewHo
 //                .into(holder.img);
         holder.title.setText(item.getTitle());
         holder.img.setImageURI(Uri.parse(item.getImgIdList().get(0)));
-
+        holder.headImg.setImageBitmap(BitmapFactory. decodeResource (mContext.getResources(),item.getHeadImgId()));
+        holder.likeNum.setText(String.valueOf(item.getLikeNum()));
         holder.itemView.setOnClickListener(v->{
             Intent intent = new Intent(mActivity, LifeContentActivity.class);
             intent.putExtra("LifeItemId",String.valueOf(item.getId()));

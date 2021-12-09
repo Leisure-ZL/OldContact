@@ -39,6 +39,7 @@ public class ContactActAdapter extends RecyclerView.Adapter<ContactActAdapter.Vi
         @BindView(R.id.alreadyNum)
         TextView mAlreadyNum;
 
+
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this,view);
@@ -72,6 +73,7 @@ public class ContactActAdapter extends RecyclerView.Adapter<ContactActAdapter.Vi
         holder.mAllNum.setText(String.valueOf(item.getAllNum()));
         holder.mAlreadyNum.setText(String.valueOf(item.getAlreadyNum()));
         holder.mDis.setText(item.getDist());
+
 
         holder.itemView.setOnClickListener(v->{
             Intent intent = new Intent(activity,ContactActActivity.class);
